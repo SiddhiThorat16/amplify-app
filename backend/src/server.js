@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Track = require('../models/track.model');
 const authRoutes = require('../routes/auth.routes');
+const trackRoutes = require('../routes/track.routes');
+const podcastRoutes = require('../routes/podcast.routes');
+const categoryRoutes = require('../routes/category.routes');
 
 dotenv.config();
 
@@ -15,6 +18,9 @@ app.use(express.json());
 
 // Auth routes (register/login)
 app.use('/api/auth', authRoutes);
+app.use('/api/tracks', trackRoutes);
+app.use('/api/podcasts', podcastRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // MongoDB connection
 mongoose

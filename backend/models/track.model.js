@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 const trackSchema = new mongoose.Schema({
   title: { type: String, required: true },
   artist: { type: String, required: true },
-  audioUrl: { type: String, required: true }, // will be file URL
-  coverImage: { type: String },
-  duration: { type: Number },
+  category: { type: String, required: true }, // "rock", "pop", "hiphop"
+  audioUrl: { type: String, required: true },
+  duration: { type: Number, default: 180 }, // seconds
+  thumbnail: { type: String },
+  plays: { type: Number, default: 0 },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Track', trackSchema);
