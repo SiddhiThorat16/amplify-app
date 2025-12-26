@@ -1,4 +1,4 @@
-// amplify-app/backend/models/Track.js
+// amplify-app/backend/models/track.model.js
 
 const mongoose = require('mongoose');
 

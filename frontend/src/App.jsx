@@ -1,15 +1,40 @@
 // amplify-app/frontend/src/App.jsx
 
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Music from './pages/Music';
+import AdminUpload from './pages/AdminUpload';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-700 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-white drop-shadow-lg">
-        Amplify 🎵 Music Streaming
-      </h1>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route
+        path="/music"
+        element={
+          <ProtectedRoute>
+            <Music />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/upload"
+        element={
+          <ProtectedRoute>
+            <AdminUpload />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

@@ -1,10 +1,11 @@
-// amplify-app/backend/server.js
+// amplify-app/backend/src/server.js
 
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Track = require('../models/Track');
+const Track = require('../models/track.model');
+const authRoutes = require('../routes/auth.routes');
 
 dotenv.config();
 
@@ -12,8 +13,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Auth routes (register/login)
+app.use('/api/auth', authRoutes);
+
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
