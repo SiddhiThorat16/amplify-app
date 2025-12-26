@@ -40,3 +40,13 @@ coverage/
 
 # Uploads (local-only dev files)
 backend/uploads/
+
+
+# Lock files (optional if you don't want to commit them)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# General build dirs (in case you add more packages later)
+dist/
+build/
