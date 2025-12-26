@@ -6,8 +6,8 @@ const trackSchema = new mongoose.Schema({
   title: { type: String, required: true },
   artist: { type: String, required: true },
   category: { type: String, required: true }, // "rock", "pop", "hiphop"
-  audioUrl: { type: String, required: true },
-  duration: { type: Number, default: 180 }, // seconds
+  audioUrl: { type: String, required: true }, // URL to file (local / S3 / etc.)
+  duration: { type: Number, default: 180 },   // seconds
   thumbnail: { type: String },
   plays: { type: Number, default: 0 },
 }, { timestamps: true });

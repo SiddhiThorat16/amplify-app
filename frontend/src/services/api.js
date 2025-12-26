@@ -1,22 +1,34 @@
-// amplify-app/frontend/src/Services/api.js
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// frontend/src/services/api.js
+const BASE_URL = 'http://localhost:5000';
 
 export const request = async (path, options = {}) => {
-  const token = localStorage.getItem('amplify_token');
+  const { isFormData, ...rest } = options;
 
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(options.headers || {}),
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
+  const headers = {};
+  if (!isFormData) {
+    headers['Content-Type'] = 'application/json';
+  }
 
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
+  const res = await fetch(BASE_URL + path, {
+    credentials: 'include',
     headers,
+    ...rest,
   });
 
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || 'Request failed');
-  return data;
+  const contentType = res.headers.get('content-type') || '';
+
+  if (!res.ok) {
+    if (contentType.includes('application/json')) {
+      const errData = await res.json();
+      throw new Error(errData.error || 'Request failed');
+    } else {
+      const text = await res.text();
+      throw new Error(text || 'Request failed');
+    }
+  }
+
+  if (contentType.includes('application/json')) {
+    return res.json();
+  }
+  return res.text();
 };

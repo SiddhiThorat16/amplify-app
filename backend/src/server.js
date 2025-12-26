@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const Track = require('../models/track.model');
 const authRoutes = require('../routes/auth.routes');
 const trackRoutes = require('../routes/track.routes');
@@ -12,6 +13,8 @@ const podcastRoutes = require('../routes/podcast.routes');
 const categoryRoutes = require('../routes/category.routes');
 const playlistRoutes = require('../routes/playlist.routes');
 const listeningHistoryRoutes = require('../routes/listeningHistory.routes');
+const adminUploadRoutes = require('../routes/adminUpload.routes');
+const streamRoutes = require('../routes/stream.routes');
 
 dotenv.config();
 
@@ -23,8 +26,15 @@ app.use(
     credentials: true,               // allow cookies/credentials
   }),
 );
-app.use(express.json());
+
+// ⬇️ increase body limits to avoid 413 on uploads
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
+
 app.use(cookieParser());
+
+// serve uploaded files statically (for audioUrl like /uploads/xyz.mp3)
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Auth routes (register/login)
 app.use('/api/auth', authRoutes);
@@ -33,6 +43,8 @@ app.use('/api/podcasts', podcastRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/listening-history', listeningHistoryRoutes);
+app.use('/api/admin', adminUploadRoutes);
+app.use('/api/stream', streamRoutes);
 
 // MongoDB connection
 mongoose
