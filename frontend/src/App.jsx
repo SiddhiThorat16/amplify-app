@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Music from './pages/Music';
 import AdminUpload from './pages/AdminUpload';
 import MiniPlayer from './components/MiniPlayer';
+import PodcastDetail from './pages/PodcastDetail';
+import PodcastList from './pages/PodcastList';
 
 function App() {
   return (
@@ -35,7 +37,26 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/podcasts"
+          element={
+            <ProtectedRoute>
+              <PodcastList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/podcasts/:id"
+          element={
+            <ProtectedRoute>
+              <PodcastDetail />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
       <MiniPlayer />
     </>
   );
