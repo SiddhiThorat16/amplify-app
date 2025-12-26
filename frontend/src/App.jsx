@@ -12,6 +12,7 @@ import PodcastDetail from "./pages/PodcastDetail";
 import PodcastList from "./pages/PodcastList";
 import PlaylistList from "./pages/PlaylistList";
 import PlaylistDetail from "./pages/PlaylistDetail";
+import RecentlyPlayed from "./pages/RecentlyPlayed";
 
 function App() {
   return (
@@ -72,6 +73,15 @@ function App() {
           element={
             <ProtectedRoute>
               <PlaylistDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/recently-played"
+          element={
+            <ProtectedRoute>
+              <RecentlyPlayed />
             </ProtectedRoute>
           }
         />

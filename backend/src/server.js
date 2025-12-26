@@ -11,6 +11,7 @@ const trackRoutes = require('../routes/track.routes');
 const podcastRoutes = require('../routes/podcast.routes');
 const categoryRoutes = require('../routes/category.routes');
 const playlistRoutes = require('../routes/playlist.routes');
+const listeningHistoryRoutes = require('../routes/listeningHistory.routes');
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/api/tracks', trackRoutes);
 app.use('/api/podcasts', podcastRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/playlists', playlistRoutes);
+app.use('/api/listening-history', listeningHistoryRoutes);
 
 // MongoDB connection
 mongoose

@@ -31,6 +31,24 @@ const Home = () => {
                 My Music
               </Link>
               <Link
+                to="/playlists"
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-xl font-medium transition-all"
+              >
+                Playlists
+              </Link>
+              <Link
+                to="/podcasts"
+                className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-xl font-medium transition-all"
+              >
+                Podcasts
+              </Link>
+              <Link
+                to="/recently-played"
+                className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-xl font-medium transition-all"
+              >
+                Recently Played
+              </Link>
+              <Link
                 to="/admin/upload"
                 className="px-6 py-3 bg-purple-500 hover:bg-purple-600 rounded-xl font-medium transition-all"
               >
