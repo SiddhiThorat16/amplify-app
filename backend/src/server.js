@@ -4,23 +4,33 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const Track = require('../models/track.model');
 const authRoutes = require('../routes/auth.routes');
 const trackRoutes = require('../routes/track.routes');
 const podcastRoutes = require('../routes/podcast.routes');
 const categoryRoutes = require('../routes/category.routes');
+const playlistRoutes = require('../routes/playlist.routes');
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // frontend URL
+    credentials: true,               // allow cookies/credentials
+  }),
+);
 app.use(express.json());
+app.use(cookieParser());
 
 // Auth routes (register/login)
 app.use('/api/auth', authRoutes);
 app.use('/api/tracks', trackRoutes);
 app.use('/api/podcasts', podcastRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/playlists', playlistRoutes);
 
 // MongoDB connection
 mongoose
@@ -39,6 +49,17 @@ app.get('/api/tracks', async (req, res) => {
     res.json(tracks);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch tracks' });
+  }
+});
+
+// TEMP DEBUG: List users for getting TEST_USER_ID
+app.get('/api/debug/users', async (req, res) => {
+  try {
+    const User = require('../models/user.model');
+    const users = await User.find({}, '_id email createdAt');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

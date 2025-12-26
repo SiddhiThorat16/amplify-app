@@ -1,15 +1,17 @@
 // amplify-app/frontend/src/App.jsx
 
-import { Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Music from './pages/Music';
-import AdminUpload from './pages/AdminUpload';
-import MiniPlayer from './components/MiniPlayer';
-import PodcastDetail from './pages/PodcastDetail';
-import PodcastList from './pages/PodcastList';
+import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Music from "./pages/Music";
+import AdminUpload from "./pages/AdminUpload";
+import MiniPlayer from "./components/MiniPlayer";
+import PodcastDetail from "./pages/PodcastDetail";
+import PodcastList from "./pages/PodcastList";
+import PlaylistList from "./pages/PlaylistList";
+import PlaylistDetail from "./pages/PlaylistDetail";
 
 function App() {
   return (
@@ -52,6 +54,24 @@ function App() {
           element={
             <ProtectedRoute>
               <PodcastDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/playlists"
+          element={
+            <ProtectedRoute>
+              <PlaylistList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/playlists/:id"
+          element={
+            <ProtectedRoute>
+              <PlaylistDetail />
             </ProtectedRoute>
           }
         />
