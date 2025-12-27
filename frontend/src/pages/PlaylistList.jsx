@@ -100,7 +100,7 @@ const PlaylistList = () => {
       </form>
 
       {playlists.length === 0 ? (
-        <p className="text-slate-400">No playlists yet. Create your first one above.</p>
+        <p className="text-slate-40">No playlists yet. Create your first one above.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {playlists.map(pl => (
