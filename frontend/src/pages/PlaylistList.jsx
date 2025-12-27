@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { request } from '../services/api';
+import bgPlaylist from '../assets/background-img-playlist.jpg';
 
 const PlaylistList = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -54,7 +55,15 @@ const PlaylistList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-8 pt-24">
+    <div
+      className="min-h-screen text-white p-8 pt-24"
+      style={{
+        backgroundImage: `linear-gradient(rgba(2,6,23,0.55), rgba(30,41,59,0.1)), url(${bgPlaylist})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-4xl font-bold">Your Playlists</h1>
         <button

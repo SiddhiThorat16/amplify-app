@@ -30,67 +30,94 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-4 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-slate-800 p-6 rounded-xl shadow-lg space-y-4"
+        className="w-full max-w-md relative z-10 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-slate-700/50"
       >
-        <h1 className="text-2xl font-semibold text-center">Create Amplify Account</h1>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent mb-2">
+            Create Account
+          </h1>
+          <p className="text-slate-400 text-sm">Join Amplify today!</p>
+        </div>
 
         {error && (
-          <p className="text-sm text-red-400 bg-red-950/40 px-3 py-2 rounded">
-            {error}
-          </p>
+          <div className="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-300 text-sm flex items-start gap-3">
+            <span>⚠️</span>
+            <span>{error}</span>
+          </div>
         )}
 
-        <div className="space-y-1">
-          <label className="text-sm">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
+        <div className="space-y-5">
+          {/* Name */}
+          <div>
+            <label className="text-sm font-semibold block mb-2 text-slate-200">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              className="w-full px-4 py-3 rounded-lg bg-slate-900/50 border border-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+              placeholder="John Doe"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="text-sm font-semibold block mb-2 text-slate-200">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              className="w-full px-4 py-3 rounded-lg bg-slate-900/50 border border-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+              placeholder="your@email.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="text-sm font-semibold block mb-2 text-slate-200">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="w-full px-4 py-3 rounded-lg bg-slate-900/50 border border-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
-        <div className="space-y-1">
-          <label className="text-sm">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-sm">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 rounded bg-emerald-500 hover:bg-emerald-600 disabled:opacity-60 transition"
+          className="w-full mt-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-white shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100"
         >
-          {loading ? 'Creating account...' : 'Register'}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="inline-block animate-spin">⏳</span>
+              Creating account...
+            </span>
+          ) : (
+            'Create Account'
+          )}
         </button>
 
-        <p className="text-xs text-center text-slate-400">
+        {/* Login Link */}
+        <p className="text-center text-slate-400 text-sm mt-6">
           Already have an account?{' '}
-          <Link className="text-emerald-400 hover:underline" to="/login">
-            Login
+          <Link className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors" to="/login">
+            Login here
           </Link>
         </p>
       </form>
