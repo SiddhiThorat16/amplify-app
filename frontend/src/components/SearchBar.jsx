@@ -1,6 +1,6 @@
 // frontend/src/components/SearchBar.jsx
 
-import { useState, useEffect, useCallback } from 'react';  // ✅ Import useEffect here
+import { useState, useEffect, useCallback } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
 import { request } from '../services/api';
 
@@ -25,7 +25,7 @@ export const SearchBar = ({ onResults }) => {
     }
   }, [onResults]);
 
-  // ✅ useEffect (not React.useEffect)
+  // useEffect (not React.useEffect)
   useEffect(() => {
     searchTracks(debouncedQuery);
   }, [debouncedQuery, searchTracks]);
